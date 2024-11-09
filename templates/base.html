@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+{% load static %}
+{% load cats %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock %}</title>
+    <link
+      rel="shortcut icon"
+    
+      type="image/x-icon"
+    />
+        <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}" />
+    
+    <!-- ==== WOW JS ==== -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <script>
+      new WOW().init();
+    </script>
+    
+  </head>
+  <!-- <style>
+    body{background-color: green;}
+  </style> -->
+  <body>
+    <!-- ====== Navbar Section Start -->
+    <div
+    style="position: fixed; background-color:rgb(9, 114, 9); height: 60px;"
+      class="
+      navbar
+        ud-header
+        bg-transparent
+        absolute
+        top-0
+        left-0
+        z-40
+        w-full
+        flex
+        items-center
+      "
+    >
+      <div class="container">
+        <div class="flex -mx-4 items-center justify-between relative">
+          <div class="px-4 w-60 max-w-full">
+            <a href="index.html" class="navbar-logo w-full block py-5">
+              <img
+              src="{% static 'assets/images/logo/1d.svg' %}"
+                alt="logo"
+                
+                class="w-10"
+              />
+            </a>
+          </div>
+          <div class="flex px-4 justify-between items-center w-full">
+            <div>
+              <button
+                id="navbarToggler"
+                class="
+                  block
+                  absolute
+                  right-4
+                  top-1/2
+                  -translate-y-1/2
+                  lg:hidden
+                  focus:ring-2
+                  ring-primary
+                  px-3
+                  py-[6px]
+                  rounded-lg
+                "
+              >
+                <span
+                  class="relative w-[30px] h-[2px] my-[6px] block bg-white"
+                ></span>
+                <span
+                  class="relative w-[30px] h-[2px] my-[6px] block bg-white"
+                ></span>
+                <span
+                  class="relative w-[30px] h-[2px] my-[6px] block bg-white"
+                ></span>
+              </button>
+              <nav
+                id="navbarCollapse"
+                class="
+                  absolute
+                  py-5
+                  lg:py-0 lg:px-4
+                  xl:px-6
+                  bg-white
+                  lg:bg-transparent
+                  shadow-lg
+                  rounded-lg
+                  max-w-[250px]
+                  w-full
+                  lg:max-w-full lg:w-full
+                  right-4
+                  top-full
+                  hidden
+                  lg:block lg:static lg:shadow-none
+                "
+              >
+                <ul class="blcok lg:flex">
+                  <li class="relative group">
+                    <a
+                      href="{% url 'home' %}"
+                      class="
+                        ud-menu-scroll
+                        text-base text-dark
+                        lg:text-white
+                        lg:group-hover:opacity-70
+                        lg:group-hover:text-white
+                        group-hover:text-primary
+                        py-2
+                        lg:py-6 lg:inline-flex lg:px-0
+                        flex
+                        mx-8
+                        lg:mr-0
+                      "
+                    >
+                      Home
+                    </a>
+                  </li>
+                  <li class="relative group">
+                    <a
+                      href="{% url 'about' %}"
+                      class="
+                        ud-menu-scroll
+                        text-base text-dark
+                        lg:text-white
+                        lg:group-hover:opacity-70
+                        lg:group-hover:text-white
+                        group-hover:text-primary
+                        py-2
+                        lg:py-6 lg:inline-flex lg:px-0
+                        flex
+                        mx-8
+                        lg:mr-0 lg:ml-7
+                        xl:ml-12
+                      "
+                    >
+                      About
+                    </a>
+                  </li>
+                  <li class="relative group">
+                    <a
+                      href="{% url 'contact' %}"
+                      class="
+                        ud-menu-scroll
+                        text-base text-dark
+                        lg:text-white
+                        lg:group-hover:opacity-70
+                        lg:group-hover:text-white
+                        group-hover:text-primary
+                        py-2
+                        lg:py-6 lg:inline-flex lg:px-0
+                        flex
+                        mx-8
+                        lg:mr-0 lg:ml-7
+                        xl:ml-12
+                      "
+                    >
+                      Contact
+                    </a>
+                  </li>
+                  <li class="relative group submenu-item">
+                    <a
+                      href="javascript:void(0)"
+                      class="
+                        text-base text-dark
+                        lg:text-white
+                        lg:group-hover:opacity-70
+                        lg:group-hover:text-white
+                        group-hover:text-primary
+                        py-2
+                        lg:py-6 lg:inline-flex lg:pl-0 lg:pr-4
+                        flex
+                        mx-8
+                        lg:mr-0 lg:ml-8
+                        xl:ml-12
+                        relative
+                        after:absolute
+                        after:w-2
+                        after:h-2
+                        after:border-b-2
+                        after:border-r-2
+                        after:border-current
+                        after:rotate-45
+                        lg:after:right-0
+                        after:right-1
+                        after:top-1/2
+                        after:-translate-y-1/2
+                        after:mt-[-2px]
+                      "
+                    >
+                      Category
+                    </a>
+                    <div
+                      class="
+                        submenu
+                        hidden
+                        relative
+                        lg:absolute
+                        w-[250px]
+                        top-full
+                        lg:top-[110%]
+                        left-0
+                        rounded-sm
+                        lg:shadow-lg
+                        p-4
+                        lg:block lg:opacity-0 lg:invisible
+                        group-hover:opacity-100
+                        lg:group-hover:visible lg:group-hover:top-full
+                        bg-white
+                        transition-[top]
+                        duration-300
+                      "
+                    >
+                    {% categories as cats %}
+                    {% for cat in cats %}
+                      <a
+                        href="{{ cat.get_absolute_url }}"
+                        class="
+                          block
+                          text-sm text-body-color
+                          rounded
+                          hover:text-primary
+                          py-[10px]
+                          px-4
+                        "
+                      >
+                        {{ cat.name }}
+                      </a>
+                      {% endfor %}
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            {% if request.user.is_authenticated %}
+              <div class="sm:flex justify-end hidden pr-16 lg:pr-0">
+                <a
+                  class="
+                    text-base
+                    font-medium
+                    text-white
+                    hover:opacity-70
+                    py-3
+                    px-7
+                    loginBtn
+                  "
+                >
+                  {{ request.user }}
+                </a>
+                <a
+                  href="{% url 'logout' %}"
+                  class="
+                    text-base
+                    font-medium
+                    text-white
+                    bg-white bg-opacity-20
+                    rounded-lg
+                    py-3
+                    px-6
+                    hover:bg-opacity-100 hover:text-dark
+                    signUpBtn
+                    duration-300
+                    ease-in-out
+                  "
+                >
+                 Logout
+                </a>
+              </div>
+              {% else %}
+              <div class="sm:flex justify-end hidden pr-16 lg:pr-0">
+                <a
+                  href="{% url 'login' %}"
+                  class="
+                    text-base
+                    font-medium
+                    text-white
+                    hover:opacity-70
+                    py-3
+                    px-7
+                    loginBtn
+                  "
+                >
+                  Login
+                </a>
+                <a
+                  href="{% url 'signup' %}"
+                  class="
+                    text-base
+                    font-medium
+                    text-white
+                    bg-white bg-opacity-20
+                    rounded-lg
+                    py-3
+                    px-6
+                    hover:bg-opacity-100 hover:text-dark
+                    signUpBtn
+                    duration-300
+                    ease-in-out
+                  "
+                >
+                  Sign Up
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ====== Navbar Section End -->
+
+    {% block content %}
+
+    {% endblock %} <!-- ====== Footer Section Start -->
+    <footer class="bg-green-500 pt-20 lg:pt-[120px] relative z-10 wow fadeInUp" data-wow-delay=".15s">
+    >
+      <div class="container">
+        <div class="flex flex-wrap -mx-4">
+          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12 px-4">
+            <div class="w-full mb-10">
+              <a
+                href="javascript:void(0)"
+                class="inline-block max-w-[160px] mb-6"
+              >
+            
+              </a>
+              <p class="text-base text-[#f3f4fe] mb-7">
+                We create digital experiences for brands and companies by using
+                technology.
+              </p>
+            
+            </div>
+          </div>
+
+       
+        </div>
+      </div>
+
+     
+
+    </footer>
+    <!-- ====== Footer Section End -->
+
+    <!-- ====== Back To Top Start -->
+    <a
+      href="javascript:void(0)"
+      class="
+        hidden
+        items-center
+        justify-center
+        bg-primary
+        text-white
+        w-10
+        h-10
+        rounded-md
+        fixed
+        bottom-8
+        right-8
+        left-auto
+        z-[999]
+        hover:bg-dark
+        back-to-top
+        shadow-md
+        transition
+        duration-300
+        ease-in-out
+      "
+    >
+      <span
+        class="w-3 h-3 border-t border-l border-white rotate-45 mt-[6px]"
+      ></span>
+    </a>
+    <!-- ====== Back To Top End -->
+
+    <!-- ====== All Scripts -->
+
+  
+  </body>
+</html>
